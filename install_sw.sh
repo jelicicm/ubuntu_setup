@@ -29,7 +29,6 @@ git config --global user.email mirkojelicic991@gmail.com
 
 timedatectl set-local-rtc 1
 
-source ./update_subl.sh
 source ./enable_hibernate.sh
 EOF
 echo "Finished installing!"
