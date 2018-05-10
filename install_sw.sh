@@ -15,6 +15,7 @@ apt install unity-tweak-tool -y
 apt install screenfetch -y
 apt install doublecmd-gtk -y
 apt install python3.6 -y
+sudo apt install python-pip -y
 apt install sublime-text-installer -y
 apt install byobu hollywood -y
 apt install chromium-browser -y
