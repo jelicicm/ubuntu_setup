@@ -21,6 +21,7 @@ apt install byobu hollywood -y
 apt install chromium-browser -y
 apt install vlc -y
 apt install trash-cli -y
+apt install libimage-exiftool-perl -y
 
 source ./update_system.sh
 
