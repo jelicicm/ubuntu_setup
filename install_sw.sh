@@ -13,24 +13,26 @@ apt install compizconfig-settings-manager -y
 apt install compiz-plugins -y
 apt install unity-tweak-tool -y
 apt install libgnome2-bin -y
+apt install screenfetch -y
 apt install doublecmd-gtk -y
 apt install python3.6 -y
+apt install python-pip -y
 apt install sublime-text-installer -y
 apt install byobu hollywood -y
 apt install chromium-browser -y
 apt install vlc -y
 apt install trash-cli -y
+apt install libimage-exiftool-perl -y
 
 source ./update_system.sh
 
 apt install git-core -y
-apt install git-svn
+apt install git-svn -y
 git config --global user.name "Mirko Jelicic"
 git config --global user.email mirkojelicic991@gmail.com
 
 timedatectl set-local-rtc 1
 
-source ./update_subl.sh
 source ./enable_hibernate.sh
 EOF
 echo "Finished installing!"
