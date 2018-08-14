@@ -14,6 +14,7 @@ apt install libgconf2-4 libnss3-1d libxss1 -y
 apt install compizconfig-settings-manager -y
 apt install compiz-plugins -y
 apt install unity-tweak-tool -y
+apt install libgnome2-bin -y
 apt install screenfetch -y
 apt install doublecmd-gtk -y
 apt install python3.6 -y
@@ -33,6 +34,8 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bi
 apt install git-core -y
 
 source ./update_system.sh
+
+apt install git-svn -y
 
 git config --global user.name "Mirko Jelicic"
 git config --global user.email mirkojelicic991@gmail.com
