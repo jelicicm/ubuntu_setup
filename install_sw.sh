@@ -23,6 +23,7 @@ apt install chromium-browser -y
 apt install vlc -y
 apt install trash-cli -y
 apt install libimage-exiftool-perl -y
+apt install meld -y
 
 source ./update_system.sh
 
