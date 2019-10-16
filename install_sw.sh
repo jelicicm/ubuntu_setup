@@ -1,48 +1,116 @@
 #!/bin/bash
-sudo -s -- <<EOF
-apt-add-repository universe
-apt-add-repository ppa:alexx2000/doublecmd -y
-apt-add-repository ppa:deadsnakes/ppa -y
-apt-add-repository ppa:webupd8team/sublime-text-3 -y
-apt-add-repository ppa:hollywood/ppa -y
-apt-add-repository ppa:nathan-renniewaldock/flux -y
-add-apt-repository ppa:ubuntu-toolchain-r/test -y
 
-apt update -y
+read=$1
+work=0
 
-apt install libgconf2-4 libnss3-1d libxss1 -y
-apt install compizconfig-settings-manager -y
-apt install compiz-plugins -y
-apt install unity-tweak-tool -y
-apt install libgnome2-bin -y
-apt install screenfetch -y
-apt install doublecmd-gtk -y
-apt install python3.6 -y
-apt install python-pip -y
-apt install sublime-text-installer -y
-apt install byobu hollywood -y
-apt install chromium-browser -y
-apt install vlc -y
-apt install trash-cli -y
-apt install libimage-exiftool-perl -y
-apt install meld -y
-apt install qbittorrent -y
-apt install fluxgui -y
-apt install build-essential software-properties-common -y
-apt install gcc-snapshot -y
-apt install gcc-7 g++-7 -y
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-apt install git-core -y
+if [ "$#" -ge 1 ]
+then
+    if [ "$read" = "work" ]
+    then
+        work=1
+    else
+        echo "Parameter must be 'work'"
+        exit 1
+    fi
+fi
 
-source ./update_system.sh
+#Install Key's
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+wget -nv https://download.opensuse.org/repositories/home:Alexx2000/xUbuntu_18.04/Release.key -O Release.key && sudo apt-key add - < Release.key
 
-apt install git-svn -y
+#Add PPA's & Repositories
+sudo add-apt-repository universe
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/Alexx2000/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:Alexx2000.list"
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+ss
+if [ "$work" != 1 ]
+then
+    sudo add-apt-repository ppa:videolan/stable-daily -y
+    sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y
+else
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -linux -y
+    sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian bionic contrib" -y
+fi
 
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+sudo apt autoclean -y
+
+sudo apt install gnome-tweak-tool -y
+sudo apt install software-properties-common -y
+sudo apt install linux-headers-generic -y
+sudo apt install dpkg-dev -y
+sudo apt install libc6-dev -y
+sudo apt install make -y
+sudo apt install gcc-9 -y
+sudo apt install g++-9 -y
+sudo apt install python3-pip -y
+
+sudo apt install terminator -y
+sudo apt install doublecmd-gtk -y
+sudo apt install git -y
+sudo apt install chromium-browser -y
+sudo apt install sublime-text -y
+sudo apt install redshift redshift-gtk -y
+sudo apt install trash-cli -y
+sudo apt install bleachbit -y
+sudo apt install screenfetch -y
+
+#Install Windows fonts
+sudo apt-get install ttf-mscorefonts-installer -y
+sudo fc-cache -y
+
+#home variant applications
+if [ "$work" != 1 ]
+then
+    sudo apt install vlc -y
+    sudo apt install qbittorrent -y
+    sudo apt install gimp -y
+fi
+
+if [ "$work" = 1 ]
+then
+    #download Skype for Linux
+    wget https://go.skype.com/skypeforlinux-64.deb
+    sudo apt install ./skypeforlinux-64.deb
+    rm skypeforlinux-64.deb
+
+    sudo apt install virtualbox-6.0 -y
+
+    #download libreoffice
+    wget http://download.documentfoundation.org/libreoffice/stable/6.3.2/deb/x86_64/LibreOffice_6.3.2_Linux_x86-64_deb.tar.gz
+    tar xzf LibreOffice_6.3.2_Linux_x86-64_deb.tar.gz
+    sudo dpkg -i LibreOffice_6.3.2.2_Linux_x86-64_deb/DEBS/*.deb
+    rm LibreOffice_6.3.2* -rf
+fi
+
+
+#configure Git
 git config --global user.name "Mirko Jelicic"
-git config --global user.email mirkojelicic991@gmail.com
+if [ "$work" = 1 ]
+then
+    git config --global user.email "mirko.jelicic@rt-rk.com"
+else
+    git config --global user.email "mirkojelicic991@gmail.com"
+fi
+
+#Add aliases
+echo "alias supdate='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y'" >> ~/.bash_aliases
+echo "alias redsh='redshift -l geoclue2 &'" >> ~/.bash_aliases
+source ~/.bash_aliases
+
+#Change target links
+sudo ln -fs /usr/bin/gcc-9 /usr/bin/gcc
+sudo ln -fs /usr/bin/g++-9 /usr/bin/g++
 
 timedatectl set-local-rtc 1
 
-source ./enable_hibernate.sh
-EOF
-echo "Finished installing!"
+#cleanup
+rm -rf Release.key
+
