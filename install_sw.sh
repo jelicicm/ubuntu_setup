@@ -123,6 +123,11 @@ sudo ln -fs /usr/bin/g++-9 /usr/bin/g++
 
 timedatectl set-local-rtc 1
 
+#Perform Git Pull of useful scripts
+cd ~/Documents/
+git clone https://github.com/jelicicm/ubuntu_setup.git
+git clone https://github.com/jelicicm/Sublime_Text_3_setup.git
+
 #cleanup
 rm -rf Release.key
 
