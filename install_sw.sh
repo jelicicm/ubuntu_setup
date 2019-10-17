@@ -2,14 +2,21 @@
 
 read=$1
 work=0
+home=0
 
-if [ "$#" -ge 1 ]
+if [ "$#" -ne 1 ]
 then
+    echo "There needs to be a parameter 'work' or 'home'"
+    exit 1
+else
     if [ "$read" = "work" ]
     then
         work=1
+    elif [ "$read" = "home" ]
+    then
+        home=1
     else
-        echo "Parameter must be 'work'"
+        echo "Parameter must be 'work' or 'home'"
         exit 1
     fi
 fi
@@ -61,13 +68,14 @@ sudo apt install redshift redshift-gtk -y
 sudo apt install trash-cli -y
 sudo apt install bleachbit -y
 sudo apt install screenfetch -y
+sudo apt install unrar -y
 
 #Install Windows fonts
 sudo apt-get install ttf-mscorefonts-installer -y
 sudo fc-cache -y
 
 #home variant applications
-if [ "$work" != 1 ]
+if [ "$home" = 1 ]
 then
     sudo apt install vlc -y
     sudo apt install qbittorrent -y
@@ -81,6 +89,10 @@ then
     sudo apt install ./skypeforlinux-64.deb
     rm skypeforlinux-64.deb
 
+    sudo apt install thunderbird -y
+    sudo apt install pkg-config -y
+    sudo apt install cmake -y
+    sudo apt install gparted -y
     sudo apt install virtualbox-6.0 -y
 
     #download libreoffice
@@ -113,4 +125,5 @@ timedatectl set-local-rtc 1
 
 #cleanup
 rm -rf Release.key
+
 
