@@ -94,6 +94,7 @@ then
     sudo apt install cmake -y
     sudo apt install gparted -y
     sudo apt install virtualbox-6.0 -y
+    sudo apt install remmina -y
 
     #download libreoffice
     wget http://download.documentfoundation.org/libreoffice/stable/6.3.2/deb/x86_64/LibreOffice_6.3.2_Linux_x86-64_deb.tar.gz
