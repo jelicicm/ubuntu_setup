@@ -1,6 +1,5 @@
 #!/bin/bash
 
+cp -f bash_aliases.txt ~/.bash_aliases
+source git_setup.sh
 source sw.sh
-source aliases.sh
-
-cp -r st3/ ~/.config/sublime-text-3
