@@ -19,6 +19,8 @@ sudo apt install redshift redshift-gtk -y
 sudo apt install neofetch -y
 sudo apt install trash-cli -y
 sudo apt install unrar -y
+sudo apt install curl -y
+sudo apt install libtinfo-dev -y
 
 # General Development
 sudo apt install dpkg-dev -y
@@ -58,5 +60,6 @@ sudo fc-cache -y
 #Change target links
 sudo ln -fs /usr/bin/gcc-9 /usr/bin/gcc
 sudo ln -fs /usr/bin/g++-9 /usr/bin/g++
+sudo ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
 timedatectl set-local-rtc 1
