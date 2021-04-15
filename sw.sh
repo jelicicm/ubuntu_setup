@@ -23,6 +23,7 @@ sudo apt install curl -y
 sudo apt install libtinfo-dev -y
 
 # General Development
+sudo apt install usb-creator-gtk -y
 sudo apt install dpkg-dev -y
 sudo apt install libc6-dev -y
 sudo apt install make -y
