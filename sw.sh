@@ -34,8 +34,7 @@ sudo apt install python3-pip -y
 sudo apt install terminator -y
 sudo apt install doublecmd-gtk -y
 sudo apt install gparted -y
-sudo apt install clipit -y
-sudo snap install code
+sudo snap install --classic code
 
 # Apps
 sudo apt install chromium-browser -y
